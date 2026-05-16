@@ -28,7 +28,31 @@ class SettingsScreen extends StatelessWidget {
             
             final profile = snapshot.data;
             if (profile == null) {
-              return const SizedBox.shrink(); // Profil nie istnieje jeszcze
+              return Card(
+                margin: const EdgeInsets.all(20),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      const Text('NIE ZNALEZIONO PROFILU WOJOWNIKA', style: TextStyle(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 10),
+                      ElevatedButton(
+                        onPressed: () async {
+                          try {
+                            // Próba wymuszenia utworzenia profilu poprzez toggleL4
+                            await SupabaseService().toggleL4Status(false);
+                          } catch (e) {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Błąd: $e')));
+                            }
+                          }
+                        },
+                        child: const Text('ZAINICJUJ PROFIL'),
+                      ),
+                    ],
+                  ),
+                ),
+              );
             }
 
             final club = profile['club'] ?? 'Brak';

@@ -4,11 +4,12 @@ import '../models/ustawka.dart';
 class SupabaseService {
   final _client = Supabase.instance.client;
 
-  // Stream wszystkich ustawek (Realtime)
+  // Stream wszystkich ustawek (Realtime) - tylko aktywne/oczekujące
   Stream<List<Ustawka>> getUstawkiStream() {
     return _client
         .from('ustawki')
         .stream(primaryKey: ['id'])
+        .eq('status', 'pending')
         .order('created_at', ascending: false)
         .map((data) => data.map((json) => Ustawka.fromMap(json)).toList());
   }

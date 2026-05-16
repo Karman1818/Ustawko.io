@@ -150,11 +150,26 @@ class _MyBattlesScreenState extends State<MyBattlesScreen> {
       );
     } else {
       // Walka w przyszłości
-      return const Column(
+      return Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.access_time),
-          Text('OCZEKUJE', style: TextStyle(fontSize: 10)),
+          SizedBox(
+            height: 24,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange.shade900,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                minimumSize: const Size(0, 0),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              onPressed: () => _showVoteDialog(context, ustawka),
+              child: const Text('ZAMKNIJ', style: TextStyle(fontSize: 10, color: Colors.white)),
+            ),
+          ),
+          const SizedBox(height: 2),
+          const Icon(Icons.access_time, size: 14),
+          const Text('OCZEKUJE', style: TextStyle(fontSize: 8)),
         ],
       );
     }

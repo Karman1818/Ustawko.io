@@ -8,6 +8,56 @@ class BrutalistTheme {
   static const Color pureWhite = Color(0xFFFFFFFF);
   static const Color darkGray = Color(0xFF1A1A1A);
 
+  static ThemeData get lightTheme {
+    return ThemeData(
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: pureWhite,
+      primaryColor: neonRed,
+      colorScheme: const ColorScheme.light(
+        primary: neonRed,
+        secondary: black,
+        surface: pureWhite,
+      ),
+      textTheme: TextTheme(
+        displayLarge: GoogleFonts.anton(fontSize: 48, color: black, height: 1.1, letterSpacing: 2.0),
+        displayMedium: GoogleFonts.anton(fontSize: 32, color: black, height: 1.1, letterSpacing: 1.5),
+        headlineLarge: GoogleFonts.anton(fontSize: 24, color: neonRed, letterSpacing: 1.0),
+        titleLarge: GoogleFonts.roboto(fontSize: 20, fontWeight: FontWeight.w900, color: black),
+        bodyLarge: GoogleFonts.roboto(fontSize: 16, fontWeight: FontWeight.w500, color: black),
+        bodyMedium: GoogleFonts.roboto(fontSize: 14, color: Colors.grey[800]),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: black,
+          foregroundColor: pureWhite,
+          elevation: 0,
+          shape: const BeveledRectangleBorder(side: BorderSide(color: neonRed, width: 2)),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          textStyle: GoogleFonts.anton(fontSize: 20, letterSpacing: 2.0),
+        ),
+      ),
+      cardTheme: const CardTheme(
+        color: pureWhite,
+        elevation: 0,
+        shape: BeveledRectangleBorder(side: BorderSide(color: black, width: 3)),
+        margin: EdgeInsets.all(8),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: Colors.grey[100],
+        border: const OutlineInputBorder(borderRadius: BorderRadius.zero, borderSide: BorderSide(color: black, width: 2)),
+        focusedBorder: const OutlineInputBorder(borderRadius: BorderRadius.zero, borderSide: BorderSide(color: neonRed, width: 3)),
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: pureWhite,
+        elevation: 0,
+        centerTitle: true,
+        titleTextStyle: GoogleFonts.anton(fontSize: 28, color: black, letterSpacing: 3.0),
+        iconTheme: const IconThemeData(color: black),
+      ),
+    );
+  }
+
   static ThemeData get darkTheme {
     return ThemeData(
       brightness: Brightness.dark,

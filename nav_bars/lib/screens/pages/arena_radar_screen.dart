@@ -20,6 +20,7 @@ class _ArenaRadarScreenState extends State<ArenaRadarScreen> {
   String? _selectedInitiator;
   String? _selectedTarget;
   bool _useEquipment = false;
+  DateTime _selectedDate = DateTime.now().add(const Duration(days: 1));
 
   @override
   void initState() {
@@ -95,6 +96,42 @@ class _ArenaRadarScreenState extends State<ArenaRadarScreen> {
 
             const SizedBox(height: 30),
 
+            // Data i Godzina
+            Text('TERMIN STARCIA', style: textTheme.headlineLarge),
+            const SizedBox(height: 10),
+            ListTile(
+              tileColor: Colors.grey[900],
+              title: Text(
+                '${_selectedDate.day.toString().padLeft(2, '0')}.${_selectedDate.month.toString().padLeft(2, '0')}.${_selectedDate.year} ${_selectedDate.hour.toString().padLeft(2, '0')}:${_selectedDate.minute.toString().padLeft(2, '0')}',
+                style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              trailing: const Icon(Icons.calendar_today, color: Colors.white),
+              onTap: () async {
+                final date = await showDatePicker(
+                  context: context,
+                  initialDate: _selectedDate,
+                  firstDate: DateTime.now().subtract(const Duration(days: 365)),
+                  lastDate: DateTime.now().add(const Duration(days: 365)),
+                );
+                if (date == null || !context.mounted) return;
+                
+                final time = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.fromDateTime(_selectedDate),
+                );
+                if (time == null || !context.mounted) return;
+                
+                setState(() {
+                  _selectedDate = DateTime(
+                    date.year, date.month, date.day,
+                    time.hour, time.minute
+                  );
+                });
+              },
+            ),
+
+            const SizedBox(height: 30),
+
             // Arena i Pogoda
             Text('RADAR AREN', style: textTheme.headlineLarge),
             const SizedBox(height: 10),
@@ -150,7 +187,7 @@ class _ArenaRadarScreenState extends State<ArenaRadarScreen> {
                     arenaLat: _currentArena!.lat,
                     arenaLng: _currentArena!.lng,
                     weatherInfo: _currentArena!.weatherReport,
-                    battleDate: DateTime.now().add(const Duration(days: 1)), // Domyślnie jutro
+                    battleDate: _selectedDate,
                     rulesJson: {'equipment': _useEquipment},
                     status: 'pending',
                   );

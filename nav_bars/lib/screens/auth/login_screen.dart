@@ -28,7 +28,16 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const FlutterLogo(size: 200),
+              Text(
+                'USTAWKA.IO',
+                style: TextStyle(
+                  fontSize: 48,
+                  fontWeight: FontWeight.w900,
+                  color: Theme.of(context).primaryColor,
+                  letterSpacing: -2,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
               const SizedBox(height: 20),
               Form(
                 key: _formKey,

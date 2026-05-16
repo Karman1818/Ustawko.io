@@ -72,7 +72,7 @@ class _MainAppState extends State<MainApp> {
       debugShowCheckedModeBanner: false,
       locale: _locale,
       themeMode: _themeMode,
-      theme: BrutalistTheme.darkTheme,
+      theme: BrutalistTheme.lightTheme,
       darkTheme: BrutalistTheme.darkTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
